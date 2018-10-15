@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<launch>
+
+  <arg name="map_file" default="/home/lizi/maps/map_inspire_lab_20180929.yaml"/>
+
+  <!-- lizi setup -->
+
+  <include file="$(find robotican_lizi)/launch/lizi.launch">
+    <arg name="move_base" value="true"/>
+    <arg name="lidar" value="true"/>
+
+    <!-- Launches a map server -->
+    <arg name="have_map_file" value='true'/>
+    <arg name="map_file" default="$(arg map_file)"/>
+
+  </include>
+
+
+  <!-- external map to odom, replaces amcl -->
+
+  <node name="lizi_mapping_drift_broadcaster_node" pkg="lizi_mapping" type="lizi_mapping_drift_broadcaster_node"/>
+
+
+</launch>

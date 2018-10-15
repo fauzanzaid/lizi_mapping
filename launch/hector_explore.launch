@@ -1,0 +1,14 @@
+<launch>
+
+  <include file="$(find robotican_lizi)/launch/lizi.launch">
+    <arg name="hector_slam" value="true"/>
+    <arg name="lidar" value="true"/>
+  </include>
+
+  <include file="$(find hector_exploration_node)/launch/exploration_planner.launch">
+  </include>
+
+  <node pkg="hector_exploration_controller" name="simple_exploration_controller" type="simple_exploration_controller" output="screen">
+  </node>
+
+</launch>

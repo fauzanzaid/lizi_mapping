@@ -26,7 +26,12 @@ int main(int argc, char** argv){
 	std::string odom_frame = "/odom";
 	std::string basefootprint_frame = "/base_footprint";
 
-	ros::NodeHandle node;
+	ros::NodeHandle node("~");
+
+
+	node.getParam("aruco_frame", aruco_basefootprint_frame);
+	node.getParam("lizi_frame", basefootprint_frame);
+
 
 	tf::TransformListener listener;
 	static tf::TransformBroadcaster broadcaster;

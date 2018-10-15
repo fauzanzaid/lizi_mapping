@@ -3,6 +3,9 @@
 
   <arg name="map_file" default="/home/lizi/maps/map_inspire_lab_20180929.yaml"/>
 
+  <arg name="_aruco_frame" default="arucoPose"/>
+  <arg name="_lizi_frame" default="base_footprint"/> 
+
   <!-- lizi setup -->
 
   <include file="$(find robotican_lizi)/launch/lizi.launch">
@@ -18,7 +21,8 @@
 
   <!-- external map to odom, replaces amcl -->
 
-  <node name="lizi_mapping_drift_broadcaster_node" pkg="lizi_mapping" type="lizi_mapping_drift_broadcaster_node"/>
+  <node name="lizi_mapping_drift_broadcaster_node" pkg="lizi_mapping" type="lizi_mapping_drift_broadcaster_node" args="_aruco_frame:=$(arg _aruco_frame) _lizi_frame:=$(arg _lizi_frame)" output="screen">   
+  </node>
 
 
 </launch>

@@ -1,0 +1,6 @@
+<launch>
+
+  <arg name="map_file" default="/home/lizi/maps/map"/>
+  <node pkg="map_server" name="map_saver" type="map_saver" output="screen" args="-f $(arg map_file)"/>
+
+</launch>

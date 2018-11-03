@@ -1,16 +1,19 @@
 <?xml version="1.0"?>
 <launch>
 
-  <arg name="map_file" default="/home/lizi/maps/map_inspire_lab_20180929.yaml"/>
+  <arg name="map_file" default="/home/lizi/maps/map.yaml"/>
 
-  <arg name="_aruco_frame" default="arucoPose"/>
-  <arg name="_lizi_frame" default="base_footprint"/> 
+  <arg name="_aruco_frame" default="camera_position"/>
+  <arg name="_lizi_frame" default="softkinetic_camera_rgb_optical_frame"/> 
 
   <!-- lizi setup -->
 
-  <include file="$(find robotican_lizi)/launch/lizi.launch">
+  <include file="$(find lizi_mapping)/launch/lizi.launch">
+  <!-- <include file="$(find lizi_mapping)/launch/lizi_original.launch"> -->
     <arg name="move_base" value="true"/>
-    <arg name="lidar" value="true"/>
+    <arg name="lidar" value="false"/>
+    <arg name="depth_camera" value="true"/>
+    <arg name="ext_map_odom" value="true"/>
 
     <!-- Launches a map server -->
     <arg name="have_map_file" value='true'/>
@@ -19,10 +22,30 @@
   </include>
 
 
+
   <!-- external map to odom, replaces amcl -->
 
-  <node name="lizi_mapping_drift_broadcaster_node" pkg="lizi_mapping" type="lizi_mapping_drift_broadcaster_node" args="_aruco_frame:=$(arg _aruco_frame) _lizi_frame:=$(arg _lizi_frame)" output="screen">   
+  <node name="lizi_mapping_drift_broadcaster_node" pkg="lizi_mapping" type="lizi_mapping_drift_broadcaster_node" args="_aruco_frame:=$(arg _aruco_frame) _lizi_frame:=$(arg _lizi_frame)" output="screen">
   </node>
+
+
+
+  <!-- aruco main -->
+
+  <include file="$(find aruco_mapping)/launch/aruco_mapping.launch" />
+
+
+
+  <!-- read bag and display markers, publish map to world -->
+
+  <node name="read_bag" pkg="aruco_tf_lizi" type="read_bag"/>
+  <node name="view_markers" pkg="aruco_tf_lizi" type="view_markers"/>
+
+
+
+  <!-- rviz -->
+
+  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find lizi_mapping)/config/nav.rviz"/>
 
 
 </launch>

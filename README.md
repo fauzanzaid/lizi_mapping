@@ -1,11 +1,38 @@
 # lizi_mapping
 
-Refer to [Integrating-aruco_mapping-with-hector_SLAM](https://github.com/Aakriti05/Integrating-aruco_mapping-with-hector_SLAM) for an overview.
-This repository is responsible for launching required the lizi ros nodes.
+Refer to [Integrating-aruco_mapping-with-hector_SLAM](https://github.com/Aakriti05/Integrating-aruco_mapping-with-hector_SLAM) for an overview. This repository is responsible for launching the required lizi ros nodes.
 
 
-### Instructions
+### Installation
 
+
+#### Requirements
+This package was tested on Ubuntu 14.04 and ros indigo.
+
+
+Required ros packages:
+1. `robotican` Obtain directly from robotican: [support@robotican.net](email:support@robotican.net)
+
+2. [`hector-mapping`](https://wiki.ros.org/hector_mapping)
+
+3. [`hector_navigation`](https://github.com/tu-darmstadt-ros-pkg/hector_navigation)  
+
+4. [`aruco_mapping`](https://github.com/Aakriti05/aruco_mapping)
+
+5. [`aruco_tf_lizi`](https://github.com/Aakriti05/aruco_tf_lizi/)
+
+
+#### Clone and build the ros package
+```
+cd your/catkin/workspace/src
+git clone https://github.com/fauzanzaid/lizi_mapping/
+
+cd ..
+catkin_make --pkg lizi_mapping
+```
+
+
+### Usage
 1. Launch lizi node with hector mapping  
    ```roslaunch lizi_mapping hector.launch```
 

@@ -12,13 +12,14 @@
   <arg name="amcl" default='false'/>
   <arg name="have_map_file" default='false'/>
   <arg name="map_file" default="$(find robotican_common)/maps/UPlat.yaml"/>
-  <arg name="depth_camera" default="false"/>
+  <arg name="depth_camera" default="true"/>
+  <arg name="ext_map_odom" default="false"/>
 
      
   <arg name="rqt" default='false'/>
 
   <arg name="front_camera" default='false'/>
-  <arg name="lidar" default='false'/>
+  <arg name="lidar" default='true'/>
   <arg name="gps" default='false'/>
   <arg name="urf" default='false'/>
   <arg name="imu" default='false'/>
@@ -40,8 +41,6 @@
   <arg name="P" default="0.0" />
   <arg name="Y" default="0.0" />
   
-  <arg name="ext_map_odom" default="false"/>
-
   <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" respawn="false" output="screen"/>
   
   <group if="$(arg twist_mux)" >
